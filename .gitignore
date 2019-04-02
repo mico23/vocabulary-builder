@@ -4,3 +4,4 @@ include/
 lib/
 .Python
 .DS_Store
+vocabulary.db
