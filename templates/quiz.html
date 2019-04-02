@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block main %}
+    <div id="question">
+        <h2>Are you ready to start the quiz?</h2>
+        <h3>There are <a>{{total_words}}</a> words to review.</h3>
+        <div class="button">
+            <button class="btn btn-primary" type="button" onClick="question()" onClick="alert('hello')">Start</button>
+        </div>
+    </div>
+{% endblock %}

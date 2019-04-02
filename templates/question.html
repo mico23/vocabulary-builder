@@ -1,0 +1,16 @@
+<h3 class="text-center" id="score">Words Submitted <a id="quiz_progress">1</a> / <a id="total_words">{{total_words}}</a></h3>
+
+<div id="questions">
+    <div id="word_meaning" class="container shadow-sm p-3 mb-5 bg-white rounded">
+        <!-- To show meaning of the words -->
+        <span>{{word_meaning}}</span>
+    </div>
+    <div>
+        <!-- For user to entre the answer -->
+        <input id="answer" class="form-control" placeholder="Answer"/>
+    </div>
+    <div class="quiz_nav">
+        <!-- to build the "Previous" button? -->
+        <button class="btn btn-primary" onClick="check({{words}})">Next</button>
+    </div>
+</div>

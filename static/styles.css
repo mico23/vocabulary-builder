@@ -1,0 +1,105 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+.container-fluid
+{
+    display: flex;
+}
+
+.profile
+{
+    margin: 10px;
+    width: 100%;
+    align-content: space-between;
+    text-align: left;
+    /* anyway to make this better? */
+}
+
+.btn .btn-primary .buttons
+{
+    margin: 10px;
+}
+
+.result_title {
+    margin-bottom: 10px;
+}
+
+#word_list
+{
+    height: 350px;
+    align-content: space-between;
+    /* anyway to make this better? */
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#word
+{
+    margin: 10px;
+    color: #007acc;
+}
+
+#meaning_result #word_meaning{
+    width: 60%;
+    height: auto;
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px){
+    .container-fluid {
+        flex-wrap: wrap;
+    }
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    .container-fluid {
+        flex-wrap: wrap;
+    }
+}

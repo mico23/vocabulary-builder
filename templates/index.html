@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <h3 class="text-center">{{top}}</h3>
+
+    <div class="container-fluid">
+        <div class="profile shadow-sm p-3 mb-5 bg-white rounded">
+            <!-- To show the date -->
+            <h4> {{today_date}}</h4>
+            <!-- To show the total number of words user saved -->
+            <h4>Total Vocabulary I have learned: {{word_count}}</h4>
+            <!-- To show weather? -->
+        </div>
+
+        <div class="profile shadow-sm p-3 mb-5 bg-white rounded">
+            <div id="word_list">{{word_list|safe}}</div>
+            <form action="/quiz" method="get">
+                <button class="btn btn-primary" type="submit">Quiz</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <div class="container form-group">
+            <span id="show_word"></span>
+        </div>
+        <div>
+            <div class="user_inputs form-group">
+                <lable for="word_search">Please entre a word: </lable>
+                <input id="word_search" autocomplete="off" autofocus placeholder="e.g. hello" type="text"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="button" onClick="getWord()">Search Word</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
