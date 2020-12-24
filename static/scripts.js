@@ -3,7 +3,8 @@
 function getWord() {
     let xhttp = new XMLHttpRequest();
 
-    let word_caputured = "word_search=" + document.getElementById("word_search").value; //require request.form['word_search'] on the server side
+    let word_caputured = "word_search=" + document.getElementById("word_search").value; 
+    //require request.form['word_search'] on the server side
     // let word_caputured = document.getElementById("word_search").value; //require request.form on the server side
     // console.log("****** DEBUG ****** " + word_caputured + " ********")
     // "word_search=" will be the key in the object sent to the server

@@ -7,15 +7,10 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from helpers import apology, login_required, lookup
 
 # Configure application
 app = Flask(__name__)
-
-# Configure CS50 Library to use SQLite database
-# db = SQL("sqlite:///vacabulary.db")
-
 
 # Ensure responses aren't cached
 @app.after_request
@@ -31,13 +26,13 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
-# ! Review the lecture about configuring SQL
 db = SQL("sqlite:///vocabulary.db")
 
-# ********* TO-DO: consider to set up a reminder for user to review the words
-# ********* TO-DO: consider to add weather forecast
-# ********* TO-DO: consider to add "word-of-day"
+# TO-DO: consider to set up a reminder for user to review the words
+# TO-DO: consider to add weather forecast performance
+# TO-DO: consider to add "word-of-day"
+
+# EFFECTS: render login page
 @app.route("/")
 @login_required
 def index():
@@ -50,33 +45,31 @@ def index():
     return render_template("index.html", today_date = datetime.date(datetime.now()),
                             result="please entre your word", word_list = word_list, word_count=len(words))
 
+# EFFECTS: render the word search result
 @app.route("/result", methods=["GET", "POST"])
 @login_required
 def result():
     # has to use JS to partially update the page.
     word = request.form["word_search"]
-    # print(word)
 
     if not word:
         return render_template("result.html", word="Please entre a word")
     else:
         try:
             result = lookup(word)
-            # print(result)
             return render_template("result.html", word=result["results"][0]['id'],
                                     meaning=result["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"][0],
                                     add_button="<input class='btn btn-outline-primary btn-sm' type='button' value='Add Word' onClick='addWord()'/>")
         except:
             return render_template("result.html", word="The word you entred does not exist. Please try again.")
 
+# EFFECTS: add a word to the vobcabulary list
 @app.route("/add_word", methods=["GET", "POST"])
 @login_required
 def add_word():
     add_word = request.form["add_word"]
-    # print('***** DEBUG, WORD TO BE ADDED' + add_word)
     words = db.execute("SELECT word FROM vocabulary WHERE user_id=:id", id=session["user_id"])
     words = [item["word"] for item in words]
-    # print(word_list)
 
     if result not in words:
         db.execute("INSERT INTO vocabulary (word, user_id) VALUES (:word, :id)", word=add_word, id=session["user_id"])
@@ -86,7 +79,7 @@ def add_word():
         for word in words:
             word_list = word_list + "<li class='list-group-item'>" + word + "</li>"
         word_list = word_list + "</ul>"
-        # print(word_list)
+
         return word_list
 
     else:
@@ -96,10 +89,10 @@ def add_word():
         for word in words:
             word_list = word_list + "<li class='list-group-item'>" + word + "</li>"
         word_list = word_list + "</ul>"
-        # print ("nothing updated")
-        # print(word_list)
+
         return word_list
 
+# EFFECTS: render the quiz page
 @app.route("/quiz", methods=["GET", "POST"])
 @login_required
 def quiz():
@@ -111,6 +104,7 @@ def quiz():
 
     return render_template("quiz.html", total_words=total_words)
 
+# EFFECTS: render the question section
 @app.route("/question", methods=["GET", "POST"])
 @login_required
 def question():
@@ -127,6 +121,7 @@ def question():
         word_meaning = "ERROR. The meaing of the word cannot be retrieved."
     return render_template("question.html", word_meaning=word_meaning, words=words, total_words=total_words)
 
+# EFFECTS: check answer provided by the user in a quiz
 @app.route("/check", methods=["GET", "POST"])
 @login_required
 def check():
@@ -134,10 +129,6 @@ def check():
     words = request.form["wordList"].split(',')
     step = int(request.form["currentStep"])
     word = words[step]
-
-    # print(answer)
-    # print(words)
-    # print(word)
 
     if answer == word:
         db.execute("UPDATE vocabulary SET correct_times = correct_times + 1, test_taken = test_taken + 1 WHERE user_id = :id AND word=:word",
@@ -162,6 +153,9 @@ def check():
         word_meaning = "Quiz completed!"
         return render_template("finish.html")
 
+# EFFECTS: render registration page and resigter a user
+#          return errors if inputs are invalid
+# TODO refactor some code here
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -206,7 +200,8 @@ def register():
     else:
         return render_template("register.html")
 
-
+# EFFCTS: process user login
+#         return errors if the user provides invalid inputs
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -243,7 +238,7 @@ def login():
     else:
         return render_template("login.html")
 
-
+# EFFECTS: logout user
 @app.route("/logout")
 def logout():
     """Log user out"""

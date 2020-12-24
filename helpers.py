@@ -11,6 +11,7 @@ import urllib.parse
 from flask import redirect, render_template, request, session
 from functools import wraps
 
+# EFFECTS: render error page
 def apology(message, code=400):
     """Render message as an apology to user."""
     def escape(s):
@@ -41,7 +42,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
+# EFFECTS: search a word via Oxford Dictionary API
 def lookup(word):
     """Look up quote for word."""
 
