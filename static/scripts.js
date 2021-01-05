@@ -3,10 +3,10 @@
 function getWord() {
     let xhttp = new XMLHttpRequest();
 
-    let word_caputured = "word_search=" + document.getElementById("word_search").value; 
+    let word_captured = "word_search=" + document.getElementById("word_search").value;
     //require request.form['word_search'] on the server side
-    // let word_caputured = document.getElementById("word_search").value; //require request.form on the server side
-    // console.log("****** DEBUG ****** " + word_caputured + " ********")
+    // let word_captured = document.getElementById("word_search").value; //require request.form on the server side
+    // console.log("****** DEBUG ****** " + word_captured + " ********")
     // "word_search=" will be the key in the object sent to the server
     // if "word_search=" is not created, the document.getElementById(id).value will be the key
     // and the value of the key will be ''.
@@ -22,7 +22,7 @@ function getWord() {
 
     xhttp.open("POST", "result" ,true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(word_caputured);
+    xhttp.send(word_captured);
     // console.log("*** DEBUG JS02 *** getWord() triggered.")
 }
 

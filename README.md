@@ -8,7 +8,7 @@ This web app allows users to register an account to build their vocabulary inven
 
 ### Prerequisites
 
-This project is run on [Python 3.7.3](https://www.python.org/downloads/release/python-373/). Flask is required to run this project. Please follow the [instruction](https://flask.palletsprojects.com/en/1.1.x/installation/) to install Flask.
+This project is run on Python 3.*. Flask is required to run this project. Please follow the [instruction](https://flask.palletsprojects.com/en/1.1.x/installation/) to install Flask.
 
 ## Running the tests
 
